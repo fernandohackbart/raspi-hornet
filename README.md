@@ -21,6 +21,7 @@ buildah unshare ./buildah.sh
 ```bash
 docker login
 export CONTAINER_TAG=`docker run raspi-hornet hornet --version | awk '{print $2;}'`
+echo $CONTAINER_TAG
 docker tag raspi-hornet fernandohackbart/raspi-hornet:$CONTAINER_TAG
 docker push fernandohackbart/raspi-hornet:$CONTAINER_TAG
 ```
@@ -58,22 +59,3 @@ docker run -it\
  -v /opt/stage/hornet/comnetdb:/app/hornet/comnetdb\
  raspi-hornet
 ```
-
-## Running on Kubernetes
-
-### K3s (Raspberry Pi)
-To run the containers in Raspberry Pi it (K3s)[https://k3s.io/] can be used, it is a lightweight implementation of the Kubernetes cluster and fits well in the Raspberry Pi capabilities
-
-Installing K3S on raspberry Pi:
-* https://blog.alexellis.io/test-drive-k3s-on-raspberry-pi/
-* https://medium.com/swlh/yet-another-raspberry-pi-k8s-cluster-part-2-k3s-installation-fc93fb5313a1
-
-### Kubernetes 
-The normal Kubernetes can be installed or hired by a cloud provider.
-
-### Manifests
-
-The manifests folder holds the Kubernetes holds the resource manifests to be used in both Kubernetes implementations.
-
-
-
