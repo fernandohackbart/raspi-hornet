@@ -26,7 +26,7 @@ docker tag raspi-hornet fernandohackbart/raspi-hornet:$CONTAINER_TAG
 docker push fernandohackbart/raspi-hornet:$CONTAINER_TAG
 ```
 
-## Running private tangle (with MQTT enabled service) in Raspberry PI
+## Running private tangle (with MQTT enabled service) with single node in Raspberry PI
 
 Using the [documentation](https://docs.iota.org/docs/hornet/1.1/tutorials/set-up-a-private-tangle-hornet) from IOTA
 
@@ -208,6 +208,7 @@ cat /dev/urandom |LC_ALL=C tr -dc 'A-Z9' | fold -w 81 | head -n 1
 Generate Merkle tree
 ```bash
 podman run -it\
+ -u 39999\
  -e COO_SEED=XUEQOQHHSQRCTMFIGKEMVOE9ONZGDXOOVFA99MSFRJPRBUIDBPCGOXFOECSYQADVDXBO9MCZCRODGBUTA \
  -v /opt/hornet/config.json:/app/hornet/config.json:ro\
  -v /opt/hornet/db:/app/hornet/db\
@@ -264,6 +265,7 @@ EOF
 
 ```bash
 podman run -it\
+ -u 39999\
  -e COO_SEED=XUEQOQHHSQRCTMFIGKEMVOE9ONZGDXOOVFA99MSFRJPRBUIDBPCGOXFOECSYQADVDXBO9MCZCRODGBUTA\
  -v /opt/hornet/config.json:/app/hornet/config.json:ro\
  -v /opt/hornet/snapshot.csv:/app/hornet/snapshot.csv:ro\
@@ -280,6 +282,7 @@ Cancel execution with `CTRL-C` when the first milstone is issued.
 podman run -d\
  --name iota-hornet\
  --restart always\
+ -u 39999\
  -p 1883:1883\
  -p 8081:8081\
  -e COO_SEED=XUEQOQHHSQRCTMFIGKEMVOE9ONZGDXOOVFA99MSFRJPRBUIDBPCGOXFOECSYQADVDXBO9MCZCRODGBUTA\
