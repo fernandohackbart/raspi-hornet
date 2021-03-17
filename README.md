@@ -193,9 +193,9 @@ cat > config.json <<EOF
 EOF
 ```
 
-Change the permissions to the hornet user in the container:
+Change the permissions to the hornet user:
 ```bash
-sudo chown -R 39999:39999 /opt/hornet 
+podman unshare chown 39999:39999 /opt/hornet/*
 ```
 
 ### Generate seed an Merkle tree
@@ -282,13 +282,13 @@ Cancel execution with `CTRL-C` when the first milstone is issued.
 podman run -d\
  --name iota-hornet\
  --restart always\
- -u 39999\
+ -u root\
  -p 1883:1883\
  -p 8081:8081\
  -e COO_SEED=XUEQOQHHSQRCTMFIGKEMVOE9ONZGDXOOVFA99MSFRJPRBUIDBPCGOXFOECSYQADVDXBO9MCZCRODGBUTA\
  -v /opt/hornet/config.json:/app/hornet/config.json:ro\
  -v /opt/hornet/mqtt_config.json:/app/hornet/mqtt_config.json:ro\
  -v /opt/hornet/snapshot.csv:/app/hornet/snapshot.csv:ro\
- -v /opt/hornet/db:/app/hornet/db\
+ -v /opt/hornet/db:/app/hornet/db:Z\
  fernandohackbart/raspi-hornet:0.5.6-0715a16
 ```
