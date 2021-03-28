@@ -265,12 +265,12 @@ EOF
 
 ```bash
 podman run -it\
- -u 39999\
+ -u root\
  -e COO_SEED=XUEQOQHHSQRCTMFIGKEMVOE9ONZGDXOOVFA99MSFRJPRBUIDBPCGOXFOECSYQADVDXBO9MCZCRODGBUTA\
  -v /opt/hornet/config.json:/app/hornet/config.json:ro\
  -v /opt/hornet/snapshot.csv:/app/hornet/snapshot.csv:ro\
  -v /opt/hornet/mqtt_config.json:/app/hornet/mqtt_config.json:ro\
- -v /opt/hornet/db:/app/hornet/db\
+ -v /opt/hornet/db:/app/hornet/db:Z\
  fernandohackbart/raspi-hornet:0.5.6-0715a16 --cooBootstrap
 ```
 
